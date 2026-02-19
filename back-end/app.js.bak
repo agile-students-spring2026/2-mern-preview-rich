@@ -3,8 +3,6 @@ const express = require('express') // CommonJS import style!
 const morgan = require('morgan') // middleware for nice logging of incoming HTTP requests
 const cors = require('cors') // middleware for enabling CORS (Cross-Origin Resource Sharing) requests.
 const mongoose = require('mongoose')
-const path = require('path')
-
 
 const app = express() // instantiate an Express object
 app.use(morgan('dev', { skip: (req, res) => process.env.NODE_ENV === 'test' })) // log all incoming requests, except when in unit test mode.  morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -13,8 +11,6 @@ app.use(cors()) // allow cross-origin resource sharing
 // use express's builtin body-parser middleware to parse any data included in a request
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
-app.use('/public', express.static(path.join(__dirname, 'public')))
-
 
 // connect to database
 mongoose
@@ -82,11 +78,12 @@ app.post('/messages/save', async (req, res) => {
   }
 })
 
+
 // a route to handle the About Us page
 app.get('/about', (req, res) => {
   res.json({
     title: "About Us",
-    imageUrl: "http://localhost:5002/public/images/me.JPG",
+    imageUrl: "http://localhost:5002/public/images/me.jpg",
     paragraphs: [
       "Hi, my name is Richmond Agyenim-Boateng. I'm an Interactive Media major interested in creative technology, performance, and building apps that connect people through interaction.",
       "I like combining design and engineering—using tools like React, Node/Express, and MongoDB, but also experimenting with physical computing and sound-based projects.",

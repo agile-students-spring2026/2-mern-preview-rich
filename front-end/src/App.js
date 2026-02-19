@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
+
+import AboutUs from './AboutUs'
 import Messages from './Messages'
 import MessageStandalone from './MessageStandalone'
 import Home from './Home'
@@ -19,7 +21,10 @@ const App = props => {
             {/* a route to see a list of all messages */}
             <Route path="/messages" element={<Messages />} />
 
-            {/* a route for just a single message, where the id of the desired message is passed as a parameter */}
+            {/* About Us page */}
+            <Route path="/about" element={<AboutUs />} />
+
+            {/* a route for just a single message */}
             <Route
               path="/messages/:messageId"
               element={<MessageStandalone />}
